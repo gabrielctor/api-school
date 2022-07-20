@@ -14,11 +14,15 @@ module.exports = (sequelize, DataTypes) => {
       })
     }
   }
+  
   Enrollments.init({
     status: DataTypes.STRING
-  }, {
+  }, 
+  {
     sequelize,
     modelName: 'Enrollments',
+    paranoid: true
   })
+  
   return Enrollments
 }

@@ -13,7 +13,7 @@ class PersonController {
     static async selectPerson(req, res) {
         const { id } = req.params
         try {
-            const person = await database.People.findOne({ where: { id: Number(id) }})
+            const person = await database.People.findOne({ where: { id: Number(id)}})
             return res.status(200).json(person)
         } catch(error) {
             return res.status(500).json(error.message)
@@ -34,8 +34,8 @@ class PersonController {
         const { id } = req.params
         const newInfo = req.body
         try {
-            await database.People.update(newInfo, { where: { id: Number(id) } })
-            const updatedPerson = await database.People.findOne({ where: { id: Number(id) } })
+            await database.People.update(newInfo, { where: { id: Number(id)}})
+            const updatedPerson = await database.People.findOne({ where: { id: Number(id)}})
             return res.status(200).json(updatedPerson)
         } catch(error) {
             return res.status(500).json(error.message)
@@ -45,9 +45,19 @@ class PersonController {
     static async deletePerson(req, res) {
         const { id } = req.params
         try {
-            await database.People.destroy({ where: { id: Number(id) }})
+            await database.People.destroy({ where: { id: Number(id)}})
             return res.status(200).json({ status: `Registro de id ${id} deletado com sucesso.` })
         } catch(error) {
+            return res.status(500).json(error.message)
+        }
+    }
+
+    static async restorePerson(req, res) {
+        const { id } = req.params
+        try {
+            await database.People.restore( { where: { id: Number(id)}})
+            return res.status(200).json({message: `Registro de id ${id} restaurado com sucesso.`})
+        } catch (error) {
             return res.status(500).json(error.message)
         }
     }
@@ -82,9 +92,9 @@ class PersonController {
         try {
             await database.Enrollments.update(newInfo, { where: {
                 id: Number(enrollmentId),
-                student_id: studentId
+                student_id: Number(studentId)
             }})
-            const updatedEnrollment = await database.Enrollments.findOne({ where: { id: Number(enrollmentId) } })
+            const updatedEnrollment = await database.Enrollments.findOne({ where: { id: Number(enrollmentId)}})
             return res.status(200).json(updatedEnrollment)
         } catch(error) {
             return res.status(500).json(error.message)
@@ -94,9 +104,22 @@ class PersonController {
     static async deleteEnrollment(req, res) {
         const { studentId, enrollmentId } = req.params
         try {
-            await database.Enrollments.destroy({ where: { id: Number(enrollmentId) }})
+            await database.Enrollments.destroy({ where: { id: Number(enrollmentId)}})
             return res.status(200).json({ status: `Registro de id ${enrollmentId} deletado com sucesso.` })
         } catch(error) {
+            return res.status(500).json(error.message)
+        }
+    }
+
+    static async restoreEnrollment(req, res) {
+        const { studentId, enrollmentId } = req.params
+        try {
+            await database.Enrollments.restore({ where: { 
+                id: Number(enrollmentId), 
+                student_id: Number(studentId)
+            }})
+            return res.status(200).json({message: `Registro de id ${enrollmentId} restaurado com sucesso.`})
+        } catch (error) {
             return res.status(500).json(error.message)
         }
     }

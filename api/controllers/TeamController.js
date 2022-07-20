@@ -13,7 +13,7 @@ class TeamController {
     static async selectTeam(req, res) {
         const { id } = req.params
         try {
-            const team = await database.Teams.findOne({ where: { id: Number(id) }})
+            const team = await database.Teams.findOne({ where: { id: Number(id)}})
             return res.status(200).json(team)
         } catch(error) {
             return res.status(500).json(error.message)
@@ -34,7 +34,7 @@ class TeamController {
         const { id } = req.params
         const newInfo = req.body
         try {
-            await database.Teams.update(newInfo, { where: { id: Number(id) } })
+            await database.Teams.update(newInfo, { where: { id: Number(id)}})
             const updatedTeam = await database.Teams.findOne({ where: { id: Number(id) } })
             return res.status(200).json(updatedTeam)
         } catch(error) {
@@ -45,8 +45,18 @@ class TeamController {
     static async deleteTeam(req, res) {
         const { id } = req.params
         try {
-            await database.Teams.destroy({ where: { id: Number(id) }})
-            return res.status(200).json({ status: `Registro de id ${id} deletado com sucesso.` })
+            await database.Teams.destroy({ where: { id: Number(id)}})
+            return res.status(200).json({ message: `Registro de id ${id} deletado com sucesso.` })
+        } catch(error) {
+            return res.status(500).json(error.message)
+        }
+    }
+
+    static async restoreTeam(req, res) {
+        const { id } = req.params
+        try {
+            await database.Teams.restore({ where: { id: Number(id)}})
+            return res.status(200).json({ message: `Registro de id ${id} restaurado com sucesso.`})
         } catch(error) {
             return res.status(500).json(error.message)
         }

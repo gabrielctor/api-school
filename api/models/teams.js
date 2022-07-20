@@ -17,11 +17,15 @@ module.exports = (sequelize, DataTypes) => {
       })
     }
   }
+  
   Teams.init({
     start_date: DataTypes.DATEONLY
-  }, {
+  }, 
+  {
     sequelize,
     modelName: 'Teams',
+    paranoid: true
   })
+  
   return Teams
 }

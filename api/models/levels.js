@@ -11,11 +11,15 @@ module.exports = (sequelize, DataTypes) => {
       })
     }
   }
+  
   Levels.init({
     desc_level: DataTypes.STRING
-  }, {
+  }, 
+  {
     sequelize,
     modelName: 'Levels',
+    paranoid: true
   })
+  
   return Levels
 }

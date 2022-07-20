@@ -14,14 +14,18 @@ module.exports = (sequelize, DataTypes) => {
       })
     }
   }
+  
   People.init({
     name: DataTypes.STRING,
     active: DataTypes.BOOLEAN,
     email: DataTypes.STRING,
     occup: DataTypes.STRING
-  }, {
+  }, 
+  {
     sequelize,
     modelName: 'People',
+    paranoid: true
   })
+  
   return People
 }
