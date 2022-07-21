@@ -46,7 +46,7 @@ class TeamController {
         const { id } = req.params
         try {
             await database.Teams.destroy({ where: { id: Number(id)}})
-            return res.status(200).json({ message: `Registro de id ${id} deletado com sucesso.` })
+            return res.status(200).json({message: `Registro de id ${id} deletado com sucesso`})
         } catch(error) {
             return res.status(500).json(error.message)
         }
@@ -56,7 +56,7 @@ class TeamController {
         const { id } = req.params
         try {
             await database.Teams.restore({ where: { id: Number(id)}})
-            return res.status(200).json({ message: `Registro de id ${id} restaurado com sucesso.`})
+            return res.status(200).json({message: `Registro de id ${id} restaurado com sucesso`})
         } catch(error) {
             return res.status(500).json(error.message)
         }

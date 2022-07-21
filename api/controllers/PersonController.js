@@ -1,9 +1,18 @@
 const database = require('../models')
 
 class PersonController {
+    static async selectActivePeople(req, res) {
+        try {
+            const activePeople = await database.People.findAll()
+            return res.status(200).json(activePeople)
+        } catch(error) {
+            return res.status(500).json(error.message)
+        }
+    }
+
     static async selectAllPeople(req, res) {
         try {
-            const allPeople = await database.People.findAll()
+            const allPeople = await database.People.scope('all').findAll()
             return res.status(200).json(allPeople)
         } catch(error) {
             return res.status(500).json(error.message)
@@ -46,7 +55,7 @@ class PersonController {
         const { id } = req.params
         try {
             await database.People.destroy({ where: { id: Number(id)}})
-            return res.status(200).json({ status: `Registro de id ${id} deletado com sucesso.` })
+            return res.status(200).json({ status: `Registro de id ${id} deletado com sucesso`})
         } catch(error) {
             return res.status(500).json(error.message)
         }
@@ -56,7 +65,7 @@ class PersonController {
         const { id } = req.params
         try {
             await database.People.restore( { where: { id: Number(id)}})
-            return res.status(200).json({message: `Registro de id ${id} restaurado com sucesso.`})
+            return res.status(200).json({message: `Registro de id ${id} restaurado com sucesso`})
         } catch (error) {
             return res.status(500).json(error.message)
         }
@@ -105,7 +114,7 @@ class PersonController {
         const { studentId, enrollmentId } = req.params
         try {
             await database.Enrollments.destroy({ where: { id: Number(enrollmentId)}})
-            return res.status(200).json({ status: `Registro de id ${enrollmentId} deletado com sucesso.` })
+            return res.status(200).json({message: `Registro de id ${enrollmentId} deletado com sucesso`})
         } catch(error) {
             return res.status(500).json(error.message)
         }
@@ -118,7 +127,7 @@ class PersonController {
                 id: Number(enrollmentId), 
                 student_id: Number(studentId)
             }})
-            return res.status(200).json({message: `Registro de id ${enrollmentId} restaurado com sucesso.`})
+            return res.status(200).json({message: `Registro de id ${enrollmentId} restaurado com sucesso`})
         } catch (error) {
             return res.status(500).json(error.message)
         }

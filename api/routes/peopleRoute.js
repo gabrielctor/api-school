@@ -3,7 +3,8 @@ const PersonController = require('../controllers/PersonController')
 
 const router = Router()
 
-router.get('/people', PersonController.selectAllPeople)
+router.get('/people', PersonController.selectActivePeople)
+router.get('/people/all', PersonController.selectAllPeople)
 router.get('/people/:id', PersonController.selectPerson)
 router.post('/people', PersonController.createPerson)
 router.put('/people/:id', PersonController.updatePerson)
