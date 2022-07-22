@@ -1,9 +1,16 @@
 const database = require('../models')
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 
 class TeamController {
     static async selectAllTeams(req, res) {
+        const { initial_date, final_date } = req.query
+        const where = {}
+        initial_date || final_date ? where.start_date = {} : null
+        initial_date ? where.start_date[Op.gte] = initial_date : null
+        final_date ? where.start_date[Op.lte] = final_date : null
         try {
-            const allTeams = await database.Teams.findAll()
+            const allTeams = await database.Teams.findAll({ where })
             return res.status(200).json(allTeams)
         } catch(error) {
             return res.status(500).json(error.message)

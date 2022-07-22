@@ -1,4 +1,5 @@
 const database = require('../models')
+const Sequelize = require('sequelize')
 
 class PersonController {
     static async selectActivePeople(req, res) {
@@ -129,6 +130,51 @@ class PersonController {
             }})
             return res.status(200).json({message: `Registro de id ${enrollmentId} restaurado com sucesso`})
         } catch (error) {
+            return res.status(500).json(error.message)
+        }
+    }
+
+    static async selectEnrollments(req, res) {
+        const { studentId } = req.params
+        try {
+            const person = await database.People.findOne({ where: { id: Number(studentId)}})
+            const enrollments = await person.getEnrolledClasses()
+            return res.status(200).json(enrollments)
+        } catch(error) {
+            return res.status(500).json(error.message)
+        }
+    }
+
+    static async selectEnrollmentsByTeam(req, res) {
+        const { teamId } = req.params
+        try {
+            const allEnrollments = await database.Enrollments.findAndCountAll({
+                where: {
+                    team_id: Number(teamId),
+                    status: 'confirmado'
+                },
+                limit: 30,
+                order: [['student_id', 'ASC']]
+            })
+            return res.status(200).json(allEnrollments)
+        } catch(error) {
+            return res.status(500).json(error.message)
+        }
+    }
+
+    static async selectCrowdedTeams(req, res) {
+        const teamLimit = 30
+        try {
+            const crowdedTeams = await database.Enrollments.findAndCountAll({
+                where: {
+                    status: 'confirmado'
+                },
+                attributes: ['team_id'],
+                group: ['team_id'],
+                having: Sequelize.literal(`count(team_id) >= ${teamLimit}`)
+            })
+            return res.status(200).json(crowdedTeams)
+        } catch(error) {
             return res.status(500).json(error.message)
         }
     }
