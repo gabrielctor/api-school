@@ -56,7 +56,7 @@ class PersonController {
         const { id } = req.params
         try {
             await database.People.destroy({ where: { id: Number(id)}})
-            return res.status(200).json({ status: `Registro de id ${id} deletado com sucesso`})
+            return res.status(200).json({ message: `Registro de id ${id} deletado com sucesso`})
         } catch(error) {
             return res.status(500).json(error.message)
         }
@@ -174,6 +174,19 @@ class PersonController {
                 having: Sequelize.literal(`count(team_id) >= ${teamLimit}`)
             })
             return res.status(200).json(crowdedTeams)
+        } catch(error) {
+            return res.status(500).json(error.message)
+        }
+    }
+
+    static async cancelPerson(req, res) {
+        const { studentId } = req.params
+        try {
+            database.sequelize.transaction(async inactivate => {
+                await database.People.update({ active: false }, { where: { id: Number(studentId)}}, {transaction: inactivate})
+                await database.Enrollments.update({ status: 'cancelado' }, { where: { student_id: Number(studentId)}}, {transaction: inactivate})
+                return res.status(200).json({message: `Estudante de id ${studentId} inativado`})
+            })
         } catch(error) {
             return res.status(500).json(error.message)
         }
