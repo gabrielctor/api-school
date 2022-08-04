@@ -3,8 +3,8 @@ const PersonController = require('../controllers/PersonController')
 
 const router = Router()
 
-router.get('/people', PersonController.selectActivePeople)
-router.get('/people/all', PersonController.selectAllPeople)
+router.get('/people', PersonController.selectAllPeople)
+router.get('/people/active', PersonController.selectActivePeople)
 router.get('/people/:id', PersonController.selectPerson)
 router.get('/people/:studentId/enrollment/:enrollmentId', PersonController.selectEnrollment)
 router.get('/people/:studentId/enrollment', PersonController.selectEnrollments)
