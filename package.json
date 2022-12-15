@@ -1,5 +1,5 @@
 {
-  "name": "api-escola",
+  "name": "api-school",
   "version": "2.0.0",
   "description": "API para registros de uma escola",
   "main": "./api/index.js",
@@ -7,7 +7,7 @@
     "start": "nodemon ./api/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["escola", "registros"],
+  "keywords": ["school", "database"],
   "author": "Gabriel Torquato",
   "license": "ISC",
   "dependencies": {
