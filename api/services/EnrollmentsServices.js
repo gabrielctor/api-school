@@ -1,9 +1,9 @@
-const Services = require('./Services')
+const Services = require('./Services');
 
 class EnrollmentsServices extends Services {
-    constructor() {
-        super('Enrollments')
-    }
+  constructor() {
+    super('Enrollments');
+  }
 }
 
-module.exports = EnrollmentsServices
+module.exports = EnrollmentsServices;

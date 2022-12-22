@@ -1,13 +1,16 @@
 {
   "name": "api-school",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "API para registros de uma escola",
   "main": "./api/index.js",
   "scripts": {
     "start": "nodemon ./api/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["school", "database"],
+  "keywords": [
+    "school",
+    "database"
+  ],
   "author": "Gabriel Torquato",
   "license": "ISC",
   "dependencies": {
@@ -19,6 +22,9 @@
     "sequelize-cli": "^6.4.1"
   },
   "devDependencies": {
+    "eslint": "^8.30.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
     "nodemon": "^2.0.19"
   }
 }

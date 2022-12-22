@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert('People', [
       {
         name: 'Marcos Silva',
@@ -9,7 +9,7 @@ module.exports = {
         email: 'marcos.silva@email.com',
         occup: 'estudante',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       },
       {
         name: 'Larissa Rodrigues',
@@ -17,7 +17,7 @@ module.exports = {
         email: 'larissa.rodrigues@email.com',
         occup: 'estudante',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       },
       {
         name: 'Michael Dias',
@@ -25,7 +25,7 @@ module.exports = {
         email: 'michael.dias@email.com',
         occup: 'estudante',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       },
       {
         name: 'Jesse Pinkman',
@@ -33,7 +33,7 @@ module.exports = {
         email: 'jesse.pinkman@email.com',
         occup: 'estudante',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       },
       {
         name: 'Maria Miranda',
@@ -41,7 +41,7 @@ module.exports = {
         email: 'maria.miranda@email.com',
         occup: 'docente',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       },
       {
         name: 'Walter White',
@@ -49,7 +49,7 @@ module.exports = {
         email: 'walter.white@email.com',
         occup: 'docente',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       },
       {
         name: 'Paulo Souza',
@@ -57,12 +57,12 @@ module.exports = {
         email: 'paulo.souza@email.com',
         occup: 'docente',
         createdAt: new Date(),
-        updatedAt: new Date()
-      }
-    ], {})
+        updatedAt: new Date(),
+      },
+    ], {});
   },
 
-  async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('People', null, {})
-  }
-}
+  async down(queryInterface, Sequelize) {
+    await queryInterface.bulkDelete('People', null, {});
+  },
+};
