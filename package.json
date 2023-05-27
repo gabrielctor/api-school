@@ -1,6 +1,6 @@
 {
   "name": "api-school",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "API para registros de uma escola",
   "main": "./api/index.js",
   "scripts": {
@@ -10,7 +10,11 @@
   "keywords": [
     "school",
     "database"
-  ],
+  ], 
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrielctorquato/api-school.git"
+  },
   "author": "Gabriel Torquato",
   "license": "ISC",
   "dependencies": {
